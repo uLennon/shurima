@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmls:th="http://thymeleaf.org/" xmls.layout="http://www.utraq.net.nz/thymeleaf/layourt"
+      xmlns:xmls="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <title>Shurima</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <link href="https://db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=Beaufort+for+LOL+Bold" rel="stylesheet">
+        <link rel="icon" type="image/png" href="https://i.imgur.com/vaBpjKk.png">
+        <script>
+            function toggleSummonerMatchList(containerId) {
+                var summonerMatchListContainer = document.getElementById(containerId);
+                if (summonerMatchListContainer) {
+                    summonerMatchListContainer.style.display = (summonerMatchListContainer.style.display === 'none') ? 'block' : 'none';
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="head">
+            <h1 class="logo"> Shurima </h1>
+            <form method="post" accept-charset="UTF-8">
+                <input type="text" name="name"  placeholder="Name" required>
+                <input type="text"  name="tagName" placeholder="TagName" required>
+                <input type="submit" value="Search">
+            </form>
+            <a href="/"><button>Home</button></a>
+        </div>
+        <div class="container" th:if="${errorMessage == null}">
+            <section class="container-left">
+                <div class="icone" th:style="'background-image: url(\'' + ${summoner.getIconeProfile()} + '\');'">
+                    <div class="stats">
+                        <h2 th:text="${summoner.getName()}">nick:</h2>
+                        <h3 th:text="${summoner.getLevel()}">Lvl</h3>
+                    </div>
+                    <a th:href="@{'/' + ${name} + '/' + ${tagName} + '/inLive'}">
+                        <button>Live Match</button>
+                    </a>
+                </div>
+                <table th:each="profile : ${profiles}">
+                    <div class="card-elo" th:if="${profile.getIconeRank()} != null">
+                        <div class="card-info">
+                            <div th:text="${profile.getQueue()}"></div>
+                            <span th:text="${profile.getTier()}"></span>
+                            <span th:text="${profile.getRank()}"></span>
+                            <div></div>
+                            <span th:text="${profile.getLeaguePoints()}"></span> <span>PDL </span>
+                            <div></div>
+                            <span>WINS </span><span th:text="${profile.getWins()}"></span>
+                            <span>LOSES </span><span th:text="${profile.getLosses()}"></span>
+                            <div></div>
+                            <span> Winrate </span><span  th:text="${profile.getWinrate()}"></span>
+                            <span>%</span>
+                        </div>
+                        <div class="elo">
+                            <img th:src="${profile.getIconeRank()}">
+                        </div>
+                    </div>
+                    <div class="card-elo" th:if="${profile.getIconeRank()} == null">
+                        <div class="card-info">
+                            <div  th:text="${profile.getQueue()}"></div>
+                            <h1>Unranked</h1>
+                        </div>
+                    </div>
+                </table>
+            </section>
+            <section class="container-right">
+                <div th:each="history, historyIndex : ${historic}">
+                    <div class="info-container" th:style="'background-image: url(\'' + ${history.getImageChampion()} + '\');'">
+                        <div class="img-champ">
+                            <div class="spacer">
+                                <h3 class="queue" th:text="${history.getQueue()}"></h3>
+                                <h2 class="win-lose" th:text="${history.getResult()}"></h2>
+                                <h2 class="freg" th:text="${history.getFreg()}"></h2>
+                                <h2 class="kda" th:text="'KDA: ' + ${history.getKda()}"></h2>
+                                <h2 class="farm" th:text="${history.getFarm()} + ' cs'"></h2>
+                                <h2 class="tempo" th:text="${history.getTime()}"></h2>
+                                <h1 class="nome" th:text="${history.getName()}"></h1>
+                            </div>
+                        </div>
+                        <button class="button-history" th:onclick="'toggleSummonerMatchList(\'summonerMatchListContainer_' + ${historyIndex.index} + '\')'">show info</button>
+                        <div th:id="'summonerMatchListContainer_' + ${historyIndex.index}" class="summoner-match-list-container" style="display: none;">
+                            <div class="container-histor">
+                                <div class="match-historic1">
+                                    <table>
+                                        <tr th:each="hist, iterStat : ${history.getSummonerMatchList().subList(0,5)}">
+                                            <td>
+                                                <img class="icon-profile-match" th:src="${hist.getImageIconProfile()}">
+                                            </td>
+                                            <td>
+                                                <img class="icon-spell1" th:src="${hist.getImageIconSpeel1()}">
+                                                <img class="icon-spell2" th:src="${hist.getImageIconSpeel2()}">
+                                            </td>
+                                            <td>
+                                                <h4 class="text-match" th:text="${hist.getName()}"></h4>
+                                                <h4 class="text-match" th:text="${hist.getKda()}"></h4>
+                                                <h4 class="text-match" th:text="${hist.getFarm() + ' cs'}"></h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="match-historic2">
+                                    <table>
+                                        <tr th:each="hist, iterStat : ${history.getSummonerMatchList().subList(5,10)}">
+                                            <td>
+                                                <h4 class="text-match" th:text="${hist.getName()}"></h4>
+                                                <h4 class="text-match" th:text="${hist.getKda()}"></h4>
+                                                <h4 class="text-match" th:text="${hist.getFarm() + ' cs'}"></h4>
+                                            </td>
+                                            <td>
+                                                <img class="icon-spell1" th:src="${hist.getImageIconSpeel1()}">
+                                                <img class="icon-spell2" th:src="${hist.getImageIconSpeel2()}">
+                                            </td>
+                                            <td>
+                                                <img class="icon-profile-match" th:src="${hist.getImageIconProfile()}">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="notFoundMessage" th:if="${errorMessage != null}">
+            <h1 th:text="${errorMessage}"></h1>
+        </div>
+    </body>
+</html>

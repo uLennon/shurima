@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org/" xmlns:layout="http://www.utraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Shurima</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link href="https://db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=Beaufort+for+LOL+Bold" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://i.imgur.com/vaBpjKk.png">
+</head>
+<body>
+<div class="head">
+    <h1 class="logo">Shurima</h1>
+    <h1 class="logo">
+        Live Match</h1>
+    <a th:href="@{'/' + ${name} + '/' + ${tagName}}">
+        <button>Return</button>
+    </a>
+</div>
+
+<br><br>
+
+<table th:if="${errorMessage == null}">
+    <thead>
+    <tr>
+        <th>Team ID</th>
+        <th>Summoner Name</th>
+        <th>Profile Icon ID</th>
+        <th>Champion ID</th>
+        <th>Spell 1 ID</th>
+        <th>Spell 2 ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="participant : ${game.getParticipants()}">
+        <td th:text="${participant.getTeamId()}"></td>
+        <td th:text="${participant.getSummonerName()}"></td>
+        <td th:text="${participant.getProfileIconId()}"></td>
+        <td th:text="${participant.getChampionId()}"></td>
+        <td th:text="${participant.getSpell1Id()}"></td>
+        <td th:text="${participant.getSpell2Id()}"></td>
+        <td th:text="${participant.getPerks()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<table th:if="${errorMessage == null}">
+    <thead>
+    <tr>
+        <th>Banned Champion ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="champion : ${game.getBannedChampions()}">
+        <td th:text="${champion.getChampionId()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="notFoundMessage" th:if="${errorMessage != null}">
+    <h1 style="font-style: inherit;" th:text="${errorMessage}"></h1>
+</div>
+</body>
+</html>

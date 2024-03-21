@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmls:th="http://thymeleaf.org/" xmls.layout="http://www.utraq.net.nz/thymeleaf/layourt"
+      xmlns:xmls="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Shurima</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=Beaufort+for+LOL+Bold" rel="stylesheet">
+        <link rel="icon" type="image/png" href="https://i.imgur.com/vaBpjKk.png">
+    </head>
+    <body class="img-front">
+        <div class="centralized">
+            <form method="post" accept-charset="UTF-8">
+                <input class="box box-name" type="text" name="name" required placeholder="Type Name">
+                <input class="box box-tag" type="text" name="tagName" required placeholder="Type Tag">
+                <button class="button button-sub" type="submit">Send</button>
+            </form>
+        </div>
+        <table class="center">
+            <th:block th:each="i : ${#numbers.sequence(0, icons.size()-1, 8)}">
+                <tr>
+                    <td th:each="icon : ${icons.subList(i, i+8 < icons.size() ? i+8 : icons.size())}">
+                        <img th:src="${icon}">
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </body>
+</html>

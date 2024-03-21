@@ -1,0 +1,319 @@
+@import url(https://db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=Beaufort+for+LOL+Bold);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: gray;
+    background-position: center;
+    font-family: Beaufort for LOL Bold;
+}
+
+.img-front {
+    background-image: url("https://i.imgur.com/LWg02J9.png");
+    background-size: cover;
+}
+
+.centralized {
+    width: 867px;
+    text-align: center;
+    color: white;
+    margin-left: 34%;
+    margin-top: 14%;
+}
+
+.box {
+    border-radius: 13px solid black;
+    box-shadow: 5px grey;
+    padding-left: 5px;
+}
+
+.box-name{
+    width: 40%;
+}
+
+.box-tag{
+    width: 15%;
+}
+
+.button-sub{
+    margin: 1%;
+}
+
+.center {
+    margin: auto;
+    margin-top: 7%;
+}
+
+/*  --------- page ------  */
+
+.head {
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: #131313;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 32px;
+    color: #a7874a;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.container {
+    background-color: #b9b5b5;
+    display: flex;
+    padding: 20px 100px;
+    height: 100%;
+    width: 100%;
+}
+
+.container-left {
+    width: 30%;
+    height: 100%;
+}
+
+.icone {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 30%;
+    max-height: 30%;
+    margin-left: 5%;
+}
+
+.stats {
+    text-align: right;
+    margin-left: 98%;
+    padding: 20%;
+}
+
+.card-elo {
+    margin: 2%;
+    width: 100%;
+    height: 19%;
+    border-radius: 1%;
+    background-color: grey;
+    text-align: center;
+    display: flex;
+}
+
+.card-info {
+    position: relative;
+    left: 5%;
+    top: 43px;
+    padding: 1%;
+    text-align: center;
+}
+
+.elo {
+    margin: 2%;
+    width: 180px;
+    height: 180px;
+}
+
+.elo img {
+    position: relative;
+    left: 15%;
+    max-width: 100%;
+    height: auto;
+    margin-left: 20%;
+}
+
+.container-right {
+    width: 70%;
+    height: 30%;
+    margin-left: 5%;
+    color: white;
+}
+
+.info-container {
+    border: 1px solid #a7874a;
+    border-radius: 5px;
+    padding: 10px;
+    transition: height 0.3s ease;
+    overflow: hidden;
+    margin: 1%;
+}
+
+.img-champ {
+    border-radius: 15px;
+    margin: 1%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-position-y: 10%;
+}
+
+.spacer {
+    width: 40%;
+    height: 0;
+    border-right: 120px solid transparent;
+    border-bottom: 200px solid gray;
+    opacity: 85%;
+}
+
+.freg {
+    position: absolute;
+    left: 21%;
+    bottom: 32%;
+}
+
+.tempo {
+    position: absolute;
+    bottom: 9%;
+    left: 4%;
+}
+
+.win-lose {
+    position: absolute;
+    left: 4%;
+    bottom: 38%;
+}
+
+.kda {
+    position: absolute;
+    left: 20%;
+    bottom: 55%;
+    font-size: 100%;
+}
+
+.queue {
+    position: absolute;
+    left: 4%;
+    top: 17%;
+}
+
+.farm {
+    position: absolute;
+    left: 23%;
+    bottom: 14%;
+    font-size: 100%;
+}
+
+.nome {
+    position: absolute;
+    left: 19%;
+    bottom: 70%;
+}
+
+form {
+    display: flex;
+}
+
+form > input {
+    width: 100%;
+    margin: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: hsl(0 0% 93%);
+    border-radius: 0.25rem;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background: #a7874a;
+    color: #1c1b1b;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.75rem 0.5rem -0.5rem hsl(0, 5%, 8%);
+}
+
+a > button {
+    width: 100%;
+    background: #a7874a;
+    color: #1c1b1b;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.75rem 0.5rem -0.5rem hsl(0, 5%, 8%);
+}
+
+button[type="submit"]{
+    width: 15%;
+    background: #a7874a;
+    color: #1c1b1b;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 1.25rem;
+    box-shadow: 0 0.75rem 0.5rem -0.5rem hsl(0, 5%, 8%);
+}
+
+.notFoundMessage {
+    width: 867px;
+    text-align: center;
+    color: white;
+    margin: auto;
+}
+
+.info-details {
+    display: none;
+    position: relative;
+    height: 600px;
+}
+
+.img-icon-champ{
+    display: inline-block;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+}
+
+.text-details{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+.icon-spell1{
+    width: 25px;
+    height: 25px;
+    display: flex;
+}
+
+.icon-spell2{
+    width: 25px;
+    height: 25px;
+}
+
+.icon-profile-match{
+    width: 50px;
+    height: 50px;
+}
+
+.text-match{
+    color: white;
+}
+
+.button-history{
+    margin-left: 1%;
+    background-color: #a7874a;
+    color: white;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container-histor{
+    display: flex;
+    margin-left: 15%;
+}
+
+.match-historic2{
+    margin-left: 2%;
+}

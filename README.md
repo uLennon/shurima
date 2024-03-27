@@ -13,6 +13,7 @@ Este projeto foi construido usando:
 
 ## :bookmark_tabs:Telas
 
-![front](https://github.com/uLennon/LoL-API/assets/99137194/70a52623-db99-4ada-bf37-e9f90a49ae8b)
-![pageFrontShurima](https://github.com/uLennon/LoL-API/assets/99137194/3f4aecc1-9761-400b-8884-c5d97e4c7a4a)
-![historicoShurima](https://github.com/uLennon/LoL-API/assets/99137194/7ac4f21b-4c5d-4dac-85ed-bf0c5f510f35)
+![front](https://github.com/uLennon/shurima/assets/99137194/faf1079a-8912-4a07-8ce5-f98108e8104d)
+![pageFrontShurima](https://github.com/uLennon/shurima/assets/99137194/4ec436ac-4a23-4935-bc1b-e66e6de73763)
+![historicoShurima](https://github.com/uLennon/shurima/assets/99137194/0b2a3d0a-c3b1-4a43-ad2b-f116c89a668f)
+

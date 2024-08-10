@@ -1,5 +1,11 @@
 ## :page_with_curl:Sobre
-- Shurima é um sistema web que permite consultar informações do perfil de contas no League of Legends.
+Shurima é uma plataforma web que oferece uma consulta detalhada sobre perfis de contas do League of Legends. Com o Shurima, você pode acessar informações como:
+
+- Partidas Jogadas: Visualize o histórico completo de partidas de uma conta.
+- Elo: Descubra o rank atual.
+- Nome: Consulte o nome de invocador de uma conta.
+- Nível: Verifique o nível atual da conta.
+
 
 ## :bookmark_tabs:Dependências
 

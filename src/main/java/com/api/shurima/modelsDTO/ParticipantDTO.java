@@ -17,6 +17,18 @@ public class ParticipantDTO {
     private int champLevel;
     private int summoner1Id;
     private int summoner2Id;
+    private String riotIdGameName;
+    private String riotIdTagline;
+    private int neutralMinionsKilled;
+    private String urlForProfile;
+    private int item0;
+    private int item1;
+    private int item2;
+    private int item3;
+    private int item4;
+    private int item5;
+    private int item6;
+
 
     public String getResult() {
         if (this.win) {

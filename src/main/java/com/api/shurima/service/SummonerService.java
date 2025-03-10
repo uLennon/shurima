@@ -29,7 +29,6 @@ public class SummonerService {
     private String URL_RANK;
     @Value("${URL_GAMECURRENT}")
     private String URL_GAMECURRENT;
-
     @Value("${URL_ICON_RANK}")
     private String URL_ICON_RANK;
 
@@ -42,12 +41,12 @@ public class SummonerService {
         return new RestTemplate().exchange(URL, HttpMethod.GET, null, new ParameterizedTypeReference<List<LeagueEntryDTO>>(){}).getBody();
     }
 
-    public ProfileDTO buildProfile(SummonerDTO summoner)  {
+    public ProfileDTO buildProfile(SummonerDTO summoner, String nickName)  {
         List<LeagueEntryDTO> league = getRankSummoner(summoner);
         ProfileDTO profile = new ProfileDTO();
-        List<RankDTO> listRank = league.stream().map(list -> new ModelMapper().map(list, RankDTO.class)).map(rank -> setWinrateRankUrl(rank)).collect(Collectors.toList());
+        List<RankDTO> listRank = league.stream().map(list -> new ModelMapper().map(list, RankDTO.class)).map(this::setWinrateRankUrl).collect(Collectors.toList());
 
-        profile.setName(summoner.getName());
+        profile.setName(nickName);
         profile.setIconeProfile(URL_ICON_PROFILE + summoner.getProfileIconId() + ".jpg");
         profile.setLevel(summoner.getSummonerLevel());
         profile.setListRank(listRank);
@@ -55,7 +54,7 @@ public class SummonerService {
         return profile;
     }
     public RankDTO setWinrateRankUrl(RankDTO rank){
-        rank.convertRank(rank.getRank());
+        rank.convertRank(rank.getQueue());
         rank.setWinrate();
         return rank.toBuilder().iconeRank(URL_ICON_RANK + rank.getTier().toLowerCase() + ".png").build();
     }

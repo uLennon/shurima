@@ -8,5 +8,4 @@ import java.util.List;
 public class MatchInfo {
     private List<SummonerMatch> summonerMatchList;
     private int team;
-
 }

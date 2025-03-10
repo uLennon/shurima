@@ -16,7 +16,7 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
-    @GetMapping("/")
+    @GetMapping("/lol")
     public ModelAndView showIconFreeWeek() {
         ModelAndView mv = new ModelAndView("index");
         List<String> icons = indexService.getUrlListIcon();
@@ -24,8 +24,8 @@ public class IndexController {
         return mv;
     }
 
-    @PostMapping("/")
-    public String showPageInfo(@RequestParam String name, @RequestParam String tagName) {
-        return "redirect:/" + name + "/" + tagName;
+    @PostMapping("/lol")
+    public String showPageInfo(@RequestParam String nameTag) {
+        return "redirect:/lol/" + nameTag.replaceFirst("#","-");
     }
 }

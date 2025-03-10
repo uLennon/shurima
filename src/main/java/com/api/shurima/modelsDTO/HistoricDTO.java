@@ -21,8 +21,8 @@ public class HistoricDTO {
 
     public String getWinOrLose(){
         if("WIN".equals(result))
-            return "green";
-        return "red";
+            return "Win";
+        return "Lose";
     }
 
     public String getDurationMatch(int time) {
@@ -33,8 +33,13 @@ public class HistoricDTO {
     }
 
     public void setKda(ParticipantDTO participant){
-        double kda = (double) (participant.getAssists() + participant.getKills()) / participant.getDeaths();
-        this.kda = Math.round(kda * 100.0) / 100.0;
+        if(participant.getDeaths() == 0){
+            double kda = (double) (participant.getAssists() + participant.getKills());
+            this.kda = Math.round(kda * 100.0) / 100.0;
+        }else {
+            double kda = (double) (participant.getAssists() + participant.getKills()) / participant.getDeaths();
+            this.kda = Math.round(kda * 100.0) / 100.0;
+        }
     }
 
 }

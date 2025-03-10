@@ -25,11 +25,11 @@ public class RankDTO {
         this.winrate = (int) (100 * (this.wins / ((double) this.wins + this.losses)));
     }
 
-    public void convertRank(String rank){
-        if(rank.equals("RANKED_FLEX_SR")){
+    public void convertRank(String queue){
+        if(queue.equals("RANKED_FLEX_SR")){
             this.queue = "RANKED FLEX";
         }
-        if (rank.equals("RANKED_SOLO_5x5")){
+        if(queue.equals("RANKED_SOLO_5x5")){
             this.queue = "RANKED SOLO/DUO";
         }
     }

@@ -9,4 +9,5 @@ public class InfoDTO {
     private String gameMode;
     private ArrayList<ParticipantDTO> participants;
     private int gameDuration;
+    private int queueId;
 }

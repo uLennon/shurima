@@ -6,7 +6,6 @@ import java.util.List;
 
 @Data
 public class CurrentGameParticipant {
-
     private long championId;
     private Perks perks;
     private long profileIconId;

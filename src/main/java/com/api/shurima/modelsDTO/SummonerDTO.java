@@ -11,5 +11,4 @@ public class SummonerDTO {
     private String id;
     private String puuid;
     private int summonerLevel;
-
 }

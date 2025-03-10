@@ -13,13 +13,9 @@ Este projeto foi construido usando:
 
 - Java 17
 - Spring Boot 3.2.1
-- Spring Caching
 - Lombok
 - Thymeleaf
-- HTML
-- CSS
-- JavaScript
-
+- Caching
 
 
 ## :bookmark_tabs:Telas

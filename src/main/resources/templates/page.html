@@ -1,129 +1,124 @@
 <!DOCTYPE html>
-<html xmls:th="http://thymeleaf.org/" xmls.layout="http://www.utraq.net.nz/thymeleaf/layourt"
-      xmlns:xmls="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.utraq.net.nz/thymeleaf/layout">
     <head>
-        <title>Shurima</title>
-        <link rel="stylesheet" type="text/css" href="/style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=Beaufort+for+LOL+Bold" rel="stylesheet">
-        <link rel="icon" type="image/png" href="https://i.imgur.com/vaBpjKk.png">
-        <script>
-            function toggleSummonerMatchList(containerId) {
-                var summonerMatchListContainer = document.getElementById(containerId);
-                if (summonerMatchListContainer) {
-                    summonerMatchListContainer.style.display = (summonerMatchListContainer.style.display === 'none') ? 'block' : 'none';
-                }
-            }
-        </script>
+        <link rel="stylesheet" href="/css/style.css">
+        <title>Shurima</title>
     </head>
     <body>
-        <div class="head">
+        <div class="container head">
             <h1 class="logo"> Shurima </h1>
-            <form method="post" accept-charset="UTF-8">
-                <input type="text" name="name"  placeholder="Name" required>
-                <input type="text"  name="tagName" placeholder="TagName" required>
+            <form method="post" accept-charset="UTF-8" class="form-container">
+                <input type="text" name="nameTag" placeholder="Name + #tag" required>
                 <input type="submit" value="Search">
             </form>
-            <a href="/"><button>Home</button></a>
+            <a href="/lol"><button>Home</button></a>
         </div>
         <div class="container" th:if="${errorMessage == null}">
-            <section class="container-left">
-                <div class="icone" th:style="'background-image: url(\'' + ${summoner.getIconeProfile()} + '\');'">
-                    <div class="stats">
-                        <h2 th:text="${summoner.getName()}">nick:</h2>
-                        <h3 th:text="${summoner.getLevel()}">Lvl</h3>
-                    </div>
-                    <a th:href="@{'/' + ${name} + '/' + ${tagName} + '/inLive'}">
-                        <button>Live Match</button>
-                    </a>
+            <div class="left-panel">
+                <div class="card profile">
+                    <img th:src="${summoner.getIconeProfile()}" alt="Ícone do jogador">
+                    <h2 th:text="${summoner.getName()}">Nick:</h2>
+                    <p th:text="${summoner.getLevel()} +' Level'"></p>
                 </div>
-                <table th:each="profile : ${profiles}">
-                    <div class="card-elo" th:if="${profile.getIconeRank()} != null">
-                        <div class="card-info">
-                            <div th:text="${profile.getQueue()}"></div>
-                            <span th:text="${profile.getTier()}"></span>
-                            <span th:text="${profile.getRank()}"></span>
-                            <div></div>
-                            <span th:text="${profile.getLeaguePoints()}"></span> <span>PDL </span>
-                            <div></div>
-                            <span>WINS </span><span th:text="${profile.getWins()}"></span>
-                            <span>LOSES </span><span th:text="${profile.getLosses()}"></span>
-                            <div></div>
-                            <span> Winrate </span><span  th:text="${profile.getWinrate()}"></span>
-                            <span>%</span>
-                        </div>
-                        <div class="elo">
-                            <img th:src="${profile.getIconeRank()}">
-                        </div>
-                    </div>
-                    <div class="card-elo" th:if="${profile.getIconeRank()} == null">
-                        <div class="card-info">
-                            <div  th:text="${profile.getQueue()}"></div>
-                            <h1>Unranked</h1>
-                        </div>
-                    </div>
-                </table>
-            </section>
-            <section class="container-right">
-                <div th:each="history, historyIndex : ${historic}">
-                    <div class="info-container" th:style="'background-image: url(\'' + ${history.getImageChampion()} + '\');'">
-                        <div class="img-champ">
-                            <div class="spacer">
-                                <h3 class="queue" th:text="${history.getQueue()}"></h3>
-                                <h2 class="win-lose" th:text="${history.getResult()}"></h2>
-                                <h2 class="freg" th:text="${history.getFreg()}"></h2>
-                                <h2 class="kda" th:text="'KDA: ' + ${history.getKda()}"></h2>
-                                <h2 class="farm" th:text="${history.getFarm()} + ' cs'"></h2>
-                                <h2 class="tempo" th:text="${history.getTime()}"></h2>
-                                <h1 class="nome" th:text="${history.getName()}"></h1>
+                <div class="card rank" th:each="profile : ${profiles}">
+                    <img th:src="${profile.getIconeRank()}" alt="Rank">
+                    <h1 th:text="${profile.getTier()} +' '+  ${profile.getRank()}"></h1>
+                    <p th:text="'Win: '+${profile.getWins()} + ' | Lose: ' +  ${profile.getLosses()}"></p>
+                    <p th:text="${profile.getWinrate()} + '% Winrate'"></p>
+                    <p th:text="${profile.getQueue()}"></p>
+                    <p th:text="${profile.getLeaguePoints()}+ ' PDL'"></p>
+                </div>
+            </div>
+            <div class="right-panel">
+                <h2>Match History</h2>
+                <div class="match" th:each="history, historyIndex : ${historic}"  >
+                    <div class="match-card">
+                        <div class="champion-container">
+                            <div class="champion-icon">
+                                <img th:src="${history.getImageChampion()}" alt="icon-champion">
                             </div>
+                            <p class="name-champ" th:text="${history.getName()}"></p>
                         </div>
-                        <button class="button-history" th:onclick="'toggleSummonerMatchList(\'summonerMatchListContainer_' + ${historyIndex.index} + '\')'">show info</button>
-                        <div th:id="'summonerMatchListContainer_' + ${historyIndex.index}" class="summoner-match-list-container" style="display: none;">
-                            <div class="container-histor">
-                                <div class="match-historic1">
-                                    <table>
-                                        <tr th:each="hist, iterStat : ${history.getSummonerMatchList().subList(0,5)}">
-                                            <td>
-                                                <img class="icon-profile-match" th:src="${hist.getImageIconProfile()}">
-                                            </td>
-                                            <td>
-                                                <img class="icon-spell1" th:src="${hist.getImageIconSpeel1()}">
-                                                <img class="icon-spell2" th:src="${hist.getImageIconSpeel2()}">
-                                            </td>
-                                            <td>
-                                                <h4 class="text-match" th:text="${hist.getName()}"></h4>
-                                                <h4 class="text-match" th:text="${hist.getKda()}"></h4>
-                                                <h4 class="text-match" th:text="${hist.getFarm() + ' cs'}"></h4>
-                                            </td>
-                                        </tr>
-                                    </table>
+                        <div class="match-info">
+                            <h3 th:text="${history.getQueue()}"></h3>
+                            <div class="stats">
+                                <span class="freg" th:text="${history.getFreg()}"></span>
+                                <span class="kda" th:text="'KDA: '+ ${history.getKda()}"></span>
+                                <span class="farm" th:text="${history.getFarm()}+' cs'"></span>
+                            </div>
+                            <p class="status"
+                               th:text="${history.getWinOrLose()}"
+                               th:classappend="${history.getWinOrLose() == 'Win' ? 'victory' : 'defeat'}">
+                            </p>
+                        </div>
+                        <div class="separa-time-button">
+                            <span class="match-time" th:text="${history.getTime()}"></span>
+                            <button class="ver-detalhes-btn" th:id="'btn-match-' + ${historyIndex.count}" type="button" th:onclick="|toggleMatchVisibility('match-' + ${historyIndex.count},'btn-match-'+ ${historyIndex.count})|">See details </button>
+                        </div>
+                    </div>
+                    <div class="teams" th:id="'match-' + ${historyIndex.count}">
+                        <div class="team team-left">
+                            <div class="player" th:each="hist, iterStat : ${history.getSummonerMatchList().subList(0,5)}">
+                                <div class="player-info">
+                                    <p th:text="${hist.getName()}">Nome do Jogador</p>
+                                    <p th:text="${hist.getKda()} + ' | ' + ${hist.getFarm()} + ' cs'">KDA | CS</p>
                                 </div>
-                                <div class="match-historic2">
-                                    <table>
-                                        <tr th:each="hist, iterStat : ${history.getSummonerMatchList().subList(5,10)}">
-                                            <td>
-                                                <h4 class="text-match" th:text="${hist.getName()}"></h4>
-                                                <h4 class="text-match" th:text="${hist.getKda()}"></h4>
-                                                <h4 class="text-match" th:text="${hist.getFarm() + ' cs'}"></h4>
-                                            </td>
-                                            <td>
-                                                <img class="icon-spell1" th:src="${hist.getImageIconSpeel1()}">
-                                                <img class="icon-spell2" th:src="${hist.getImageIconSpeel2()}">
-                                            </td>
-                                            <td>
-                                                <img class="icon-profile-match" th:src="${hist.getImageIconProfile()}">
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <div class="spells">
+                                    <img th:src="${hist.getImageIconSpeel1()}" alt="Flash">
+                                    <img th:src="${hist.getImageIconSpeel2()}" alt="Teleport">
+                                </div>
+                                <a th:href="@{'/lol/'+${hist.getLinkProfile()}}">
+                                    <div class="img-champion-container">
+                                        <img class="champion" th:src="${hist.getImageIconProfile()}" alt="Campeão">
+                                        <p class="champion-level level-left" th:text="${hist.getLevel()}"></p>
+                                    </div>
+                                </a>
+                                <div class="items items-left">
+                                    <img class="img-items" th:src="${hist.getItem0()}">
+                                    <img class="img-items" th:src="${hist.getItem1()}">
+                                    <img class="img-items" th:src="${hist.getItem2()}">
+                                    <img class="img-items" th:src="${hist.getItem3()}">
+                                    <img class="img-items" th:src="${hist.getItem4()}">
+                                    <img class="img-items" th:src="${hist.getItem5()}">
+                                    <img class="img-items" th:src="${hist.getItem6()}">
                                 </div>
                             </div>
                         </div>
+                        <div class="team team-right">
+                            <div class="player" th:each="hist, iterStat : ${history.getSummonerMatchList().subList(5,10)}">
+                                <a th:href="@{'/lol/'+${hist.getLinkProfile()}}">
+                                    <div class="img-champion-container">
+                                        <img class="champion" th:src="${hist.getImageIconProfile()}" alt="Campeão">
+                                        <p class="champion-level level-right" th:text="${hist.getLevel()}"></p>
+                                    </div>
+                                </a>
+                                <div class="spells">
+                                    <img th:src="${hist.getImageIconSpeel1()}" alt="Flash">
+                                    <img th:src="${hist.getImageIconSpeel2()}" alt="Teleport">
+                                </div>
+                                <div class="player-info">
+                                    <p th:text="${hist.getName()}">Nome do Jogador</p>
+                                    <p th:text="${hist.getKda()} + ' | ' + ${hist.getFarm()} + ' cs'">KDA | CS</p>
+                                </div>
+                                <div class="items items-right">
+                                    <img class="img-items" th:src="${hist.getItem6()}">
+                                    <img class="img-items" th:src="${hist.getItem5()}">
+                                    <img class="img-items" th:src="${hist.getItem4()}">
+                                    <img class="img-items" th:src="${hist.getItem3()}">
+                                    <img class="img-items" th:src="${hist.getItem2()}">
+                                    <img class="img-items" th:src="${hist.getItem1()}">
+                                    <img class="img-items" th:src="${hist.getItem0()}">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-        <div class="notFoundMessage" th:if="${errorMessage != null}">
-            <h1 th:text="${errorMessage}"></h1>
-        </div>
+        <h1 id="erroName" th:text="${errorMessage}"></h1>
+        <script src="/js/script.js"></script>
     </body>
 </html>

@@ -6,7 +6,6 @@ import java.util.List;
 
 @Data
 public class CurrentGameInfo {
-
     private long gameId;
     private String gameType;
     private long gameStartTime;
@@ -18,6 +17,4 @@ public class CurrentGameInfo {
     private long  gameQueueConfigId;
     private Observer observers;
     private List<CurrentGameParticipant> participants;
-
-
 }

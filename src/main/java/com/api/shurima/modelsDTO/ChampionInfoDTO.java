@@ -9,5 +9,4 @@ public class ChampionInfoDTO {
     private int maxNewPlayerLevel;
     private List<Integer> freeChampionIdsForNewPlayers;
     private List<Integer> freeChampionIds;
-
 }
